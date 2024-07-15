@@ -1,4 +1,4 @@
-FROM kubeflownotebookswg/jupyter-pytorch-cuda-full:v1.9.0-rc.2
+FROM --platform=linux/amd64 kubeflownotebookswg/jupyter-pytorch-cuda-full:v1.9.0-rc.2
 
 # # args - software versions on BASE
 # ARG PYTORCH_VERSION=2.3.0

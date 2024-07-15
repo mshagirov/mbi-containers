@@ -3,7 +3,8 @@
 
 # Kubeflow Containers
 > Follows KF naming and versioning convention and the images use KF base images as initial layers where possible.
-- Dockerfiles: [./kubeflow](./kubeflow)
+- Dockerfiles:
+  - Location: [./kubeflow](./kubeflow)
   - Notebook base:
     - Jupyter notebook image names start with `jupyter-*`.
     - VS Code (notebook) image names start with `codeserver-*`

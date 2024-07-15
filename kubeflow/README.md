@@ -1,6 +1,6 @@
 # Kubeflow Dockerfiles
 > See https://www.kubeflow.org/docs/components/notebooks/container-images/
-> <br\>
+> <br/>
 > or search for "container images for kubeflow" online.
 
 ## Kubeflow Notebook Image Requirements

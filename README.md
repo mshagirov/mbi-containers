@@ -2,8 +2,7 @@
 > Murat Shagirov
 
 # Kubeflow Containers
-> Follows KF naming and versioning convention <br/>
-> where possible, the images use KF base images.
+> Follows KF naming and versioning convention and the images use KF base images as initial layers where possible.
 - Notebook base:
   - Jupyter notebook image names start with `jupyter-*`.
   - VS Code (notebook) image names start with `codeserver-*`

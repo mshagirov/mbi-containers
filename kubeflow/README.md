@@ -2,6 +2,14 @@
 > See https://www.kubeflow.org/docs/components/notebooks/container-images/
 > <br/>
 > or search for "container images for kubeflow" online.
+## Notebook base:
+> Follows KF naming and versioning
+Base image for Kubeflow notebooks:
+- Jupyter notebook image names start with `jupyter-*`.
+- VS Code (notebook) image names start with `codeserver-*`
+
+CPU and CUDA images:
+- CUDA images contain `*-cuda-*` in their names, otherwise they are CPU container images.
 
 ## Kubeflow Notebook Image Requirements
 > From Kubeflow v1.7 documentation

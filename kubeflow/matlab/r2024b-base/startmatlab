@@ -1,0 +1,4 @@
+#!/bin/bash
+
+MWI_BASE_URL=${NB_PREFIX}
+matlab-proxy-app

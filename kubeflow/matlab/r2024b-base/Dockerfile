@@ -153,54 +153,54 @@ COPY --chown=${NB_USER}:${NB_GID} --chmod=755 s6/ /etc
 # e.g. ADDITIONAL_PRODUCTS="Statistics_and_Machine_Learning_Toolbox Parallel_Computing_Toolbox MATLAB_Coder".
 # If mpm fails to install successfully then output the logfile to the terminal, otherwise cleanup.
 
-# Switch to user matlab, and pass in $HOME variable to mpm,
-# so that mpm can set the correct root folder for the support packages.
-WORKDIR /tmp
+# # Switch to user matlab, and pass in $HOME variable to mpm,
+# # so that mpm can set the correct root folder for the support packages.
+# WORKDIR /tmp
 
-# The quotations "" around the package name and the new line \n are required
-RUN echo \
-"Curve_Fitting_Toolbox "\
-"Image_Processing_Toolbox "\
-"Deep_Learning_Toolbox "\
-"Optimization_Toolbox "\
-"Parallel_Computing_Toolbox "\
-"Statistics_and_Machine_Learning_Toolbox "\
-"Symbolic_Math_Toolbox "\
->> /tmp/products
+# # The quotations "" around the package name and the new line \n are required
+# RUN echo \
+# "Curve_Fitting_Toolbox "\
+# "Image_Processing_Toolbox "\
+# "Deep_Learning_Toolbox "\
+# "Optimization_Toolbox "\
+# "Parallel_Computing_Toolbox "\
+# "Statistics_and_Machine_Learning_Toolbox "\
+# "Symbolic_Math_Toolbox "\
+# >> /tmp/products
 
-RUN wget -q https://www.mathworks.com/mpm/glnxa64/mpm \
-    && chmod +x mpm \
-    && EXISTING_MATLAB_LOCATION=$(dirname $(dirname $(readlink -f $(which matlab)))) \
-    && sudo HOME=${HOME} ./mpm install \
-        --destination=${EXISTING_MATLAB_LOCATION} \
-        --release=${MATLAB_RELEASE} \
-        --products $(cat ./products) \
-    || (echo "MPM Installation Failure. See below for more information:" && cat /tmp/mathworks_root.log && false) \
-    && sudo rm -rf mpm /tmp/mathworks_root.log /tmp/products
+# RUN wget -q https://www.mathworks.com/mpm/glnxa64/mpm \
+#     && chmod +x mpm \
+#     && EXISTING_MATLAB_LOCATION=$(dirname $(dirname $(readlink -f $(which matlab)))) \
+#     && sudo HOME=${HOME} ./mpm install \
+#         --destination=${EXISTING_MATLAB_LOCATION} \
+#         --release=${MATLAB_RELEASE} \
+#         --products $(cat ./products) \
+#     || (echo "MPM Installation Failure. See below for more information:" && cat /tmp/mathworks_root.log && false) \
+#     && sudo rm -rf mpm /tmp/mathworks_root.log /tmp/products
 
-# When running the container a license file can be mounted,
-# or a license server can be provided as an environment variable.
-# For more information, see https://hub.docker.com/r/mathworks/matlab
+# # When running the container a license file can be mounted,
+# # or a license server can be provided as an environment variable.
+# # For more information, see https://hub.docker.com/r/mathworks/matlab
 
-# Alternatively, you can provide a license server to use
-# with the docker image while building the image.
-# Specify the host and port of the machine that serves the network licenses
-# if you want to bind in the license info as an environment variable.
-# You can also build with something like --build-arg LICENSE_SERVER=27000@MyServerName,
-# in which case you should uncomment the following two lines.
-# If these lines are uncommented, $LICENSE_SERVER must be a valid license
-# server or browser mode will not start successfully.
-# ARG LICENSE_SERVER
-# ENV MLM_LICENSE_FILE=$LICENSE_SERVER
+# # Alternatively, you can provide a license server to use
+# # with the docker image while building the image.
+# # Specify the host and port of the machine that serves the network licenses
+# # if you want to bind in the license info as an environment variable.
+# # You can also build with something like --build-arg LICENSE_SERVER=27000@MyServerName,
+# # in which case you should uncomment the following two lines.
+# # If these lines are uncommented, $LICENSE_SERVER must be a valid license
+# # server or browser mode will not start successfully.
+# # ARG LICENSE_SERVER
+# # ENV MLM_LICENSE_FILE=$LICENSE_SERVER
 
-# The following environment variables allow MathWorks to understand how this MathWorks
-# product is being used. This information helps us make MATLAB even better.
-# Your content, and information about the content within your files, is not shared with MathWorks.
-# To opt out of this service, delete the environment variables defined in the following line.
-# See the Help Make MATLAB Even Better section in the accompanying README to learn more:
-# https://github.com/mathworks-ref-arch/matlab-dockerfile#help-make-matlab-even-better
+# # The following environment variables allow MathWorks to understand how this MathWorks
+# # product is being used. This information helps us make MATLAB even better.
+# # Your content, and information about the content within your files, is not shared with MathWorks.
+# # To opt out of this service, delete the environment variables defined in the following line.
+# # See the Help Make MATLAB Even Better section in the accompanying README to learn more:
+# # https://github.com/mathworks-ref-arch/matlab-dockerfile#help-make-matlab-even-better
 
-# ENV MW_DDUX_FORCE_ENABLE=true MW_CONTEXT_TAGS=$MW_CONTEXT_TAGS,MATLAB:TOOLBOXES:DOCKERFILE:V1
+# # ENV MW_DDUX_FORCE_ENABLE=true MW_CONTEXT_TAGS=$MW_CONTEXT_TAGS,MATLAB:TOOLBOXES:DOCKERFILE:V1
 
 EXPOSE 8888
 

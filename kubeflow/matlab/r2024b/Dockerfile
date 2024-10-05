@@ -81,8 +81,8 @@ RUN export DEBIAN_FRONTEND=noninteractive \
  && apt-get autoremove \
  && rm -rf /var/lib/apt/lists/*
 
-RUN python3 -m pip install --upgrade --quiet --no-cache-dir \
-    matlab-proxy
+# RUN python3 -m pip install --upgrade --quiet --no-cache-dir \
+#     matlab-proxy
 
 # ENV MWI_BASE_URL="/matlab"
 
@@ -161,11 +161,11 @@ WORKDIR /tmp
 RUN echo \
 "Curve_Fitting_Toolbox "\
 "Image_Processing_Toolbox "\
-"Deep_Learning_Toolbox "\
+# "Deep_Learning_Toolbox "\
 "Optimization_Toolbox "\
-"Parallel_Computing_Toolbox "\
+# "Parallel_Computing_Toolbox "\
 "Statistics_and_Machine_Learning_Toolbox "\
-"Symbolic_Math_Toolbox "\
+# "Symbolic_Math_Toolbox "\
 >> /tmp/products
 
 RUN wget -q https://www.mathworks.com/mpm/glnxa64/mpm \
@@ -174,7 +174,7 @@ RUN wget -q https://www.mathworks.com/mpm/glnxa64/mpm \
     && sudo HOME=${HOME} ./mpm install \
         --destination=${EXISTING_MATLAB_LOCATION} \
         --release=${MATLAB_RELEASE} \
-        --products $(cat ./products) \
+        --products $(cat /tmp/products) \
     || (echo "MPM Installation Failure. See below for more information:" && cat /tmp/mathworks_root.log && false) \
     && sudo rm -rf mpm /tmp/mathworks_root.log /tmp/products
 
@@ -207,16 +207,12 @@ EXPOSE 8888
 ENV NB_PREFIX=/
 ENV MWI_APP_PORT=8888
 ENV MWI_BASE_URL=${NB_PREFIX}
-# ENV MWI_BASE_URL="/matlab"
-COPY --chown=0:0 --chmod=755 ./startmatlab /usr/bin/
+
+COPY --chown=0:0 --chmod=755 ./start_matlab /usr/bin/
 
 # USER matlab
 USER $NB_UID
-# for Matlab apps in user's home dir-y
-# ENV PATH="${HOME}/.local/bin:$PATH"
-# ENTRYPOINT ["tini", "--", "/bin/run.sh"]
 
-ENTRYPOINT ["startmatlab"]
-# CMD ["-browser"]
+ENTRYPOINT ["tini", "--","start_matlab"]
 
 WORKDIR ${HOME}

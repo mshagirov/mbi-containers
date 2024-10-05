@@ -1,0 +1,7 @@
+#!/bin/bash
+
+set -e
+# PROXY_SETTINGS
+export MWI_BASE_URL=${NB_PREFIX} #matlab-proxy-app
+export PROXY_SETTINGS=${NB_PREFIX}
+/bin/run.sh -browser

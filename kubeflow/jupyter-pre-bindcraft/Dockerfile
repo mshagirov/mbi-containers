@@ -21,6 +21,7 @@ RUN python3 -m pip install --quiet --no-cache-dir -U \
     joblib \
     ml-collections \
     optax \
+    pyrosetta-installer \
     torch \
     torchvision \
     torchaudio
@@ -44,9 +45,9 @@ RUN mamba install -y -q \
 # combine to above once errors are resolved
 # RUN mamba install -y -q pyrosetta --channel https://conda.graylab.jhu.edu && mamba clean -a -f -y
 
-RUN python3 -m pip install --quiet --no-cache-dir -U \
-    pyrosetta-installer \
-  && python3 -c 'import pyrosetta_installer; pyrosetta_installer.install_pyrosetta()'
+# RUN python3 -m pip install --quiet --no-cache-dir -U \
+#     pyrosetta-installer \
+#    && python3 -c 'import pyrosetta_installer; pyrosetta_installer.install_pyrosetta()'
 RUN python3 -m pip install --quiet --no-cache-dir \
     git+https://github.com/sokrypton/ColabDesign.git --no-deps
 

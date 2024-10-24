@@ -40,9 +40,25 @@ RUN mamba install -y -q \
     py3dmol==2.4.0 \
     -c conda-forge \
     # -c anaconda -c nvidia  \
-  && mamba install -y -q pyrosetta --channel https://conda.graylab.jhu.edu \
   && mamba clean -a -f -y
+# combine to above once errors are resolved
+# RUN mamba install -y -q pyrosetta --channel https://conda.graylab.jhu.edu && mamba clean -a -f -y
 
+RUN python3 -m pip install --quiet --no-cache-dir -U \
+    pyrosetta-installer \
+  && python3 -c 'import pyrosetta_installer; pyrosetta_installer.install_pyrosetta()'
 RUN python3 -m pip install --quiet --no-cache-dir \
     git+https://github.com/sokrypton/ColabDesign.git --no-deps
+
+# ENV NB_UID=1000
+# ENV USERS_GID=100
+
+USER root
+RUN mkdir -pv /content/bindcraft/ \
+  && chown -R 1000:100 /content
+
+USER 1000
+RUN git clone --depth 1 https://github.com/martinpacesa/BindCraft /content/bindcraft/ \
+  && chmod +x /content/bindcraft/functions/dssp \
+  && chmod +x /content/bindcraft/functions/DAlphaBall.gcc
 

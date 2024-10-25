@@ -4,7 +4,10 @@ USER root
 
 RUN export DEBIAN_FRONTEND=noninteractive \
  && apt-get -yq update \
- && apt-get -yq install --no-install-recommends aria2 \
+ && apt-get -yq install --no-install-recommends \
+  aria2 \
+  ffmpeg \
+  libgfortran5 \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 

@@ -10,7 +10,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 
 # switch back to the NB_USER
 USER 1000
-# mamba install overrides cuda jax and jaxlib; re-install/upgrade them after mamba
+# mamba install overrides cuda jax and jaxlib; re-install them after mamba
 RUN mamba install -y -q \
     chex==0.1.86 \
     pdbfixer==1.9 \
@@ -49,4 +49,6 @@ RUN git clone --depth 1 https://github.com/martinpacesa/BindCraft /content/bindc
   && chmod +x /content/bindcraft/functions/dssp \
   && chmod +x /content/bindcraft/functions/DAlphaBall.gcc \
   && ln -s /content/bindcraft/ /home/jovyan/bindcraft
+
+RUN python3 -c 'import pyrosetta_installer; pyrosetta_installer.install_pyrosetta()'
 

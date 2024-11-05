@@ -1,4 +1,4 @@
-FROM --platform=linux/amd64 kubeflownotebookswg/jupyter-pytorch-cuda-full:v1.9.0-rc.2
+FROM kubeflownotebookswg/jupyter-pytorch-cuda-full:v1.9.0
 
 # # args - software versions on BASE
 # ARG PYTORCH_VERSION=2.3.0
@@ -8,7 +8,12 @@ FROM --platform=linux/amd64 kubeflownotebookswg/jupyter-pytorch-cuda-full:v1.9.0
 
 # use pip to install PyG for torch CUDA 12.1
 RUN python3 -m pip install --quiet --no-cache-dir \
-    torch_geometric==2.5.3
+    torch_geometric==2.6.1
 RUN python3 -m pip install --quiet --no-cache-dir \
-    pyg_lib torch_scatter torch_sparse torch_cluster torch_spline_conv \
+    pyg_lib \
+    torch_cluster \
+    torch_scatter \
+    torch_sparse \
+    torch_spline_conv \
     -f https://data.pyg.org/whl/torch-2.3.0+cu121.html
+

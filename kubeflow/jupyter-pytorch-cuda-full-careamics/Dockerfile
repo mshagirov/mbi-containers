@@ -1,4 +1,4 @@
-FROM muratshagirov/jupyter-pytorch-cu121@sha256:5cd15eb9a17ffb4753cdca03e02477b103cf4a50dfb409e4f92a47f7dc289988
+FROM muratshagirov/jupyter-pytorch-cu121:latest
 
 USER $NB_UID
 

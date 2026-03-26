@@ -14,7 +14,7 @@ docker build --platform linux/amd64 -t muratshagirov/jupyter-pytorch-cu121 ./bas
 docker build --platform linux/amd64 -t muratshagirov/careamics-cu121-py312 .
 ```
 
-- For using online repo, push the base image to an online repository then edit
+- For using online repo, push the base image to an online repository. Then, edit
 the CAREamics Dockerfile to use the base image repository with SHA256 digest,
 e.g.,
 
